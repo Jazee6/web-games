@@ -1,13 +1,15 @@
 /**
- * 完整构建：Game Bundle → 站点 → 平台规则文件（_headers、_redirects）→ 产物检查。
+ * 完整构建：Game Bundle → 回放金标跨引擎检查 → 站点 → 平台规则文件（_headers、_redirects）→ 产物检查。
  */
 import { copyFile } from "node:fs/promises"
 import path from "node:path"
 import { buildGames } from "./build-games"
 import { checkDist } from "./check-dist"
+import { checkEngines } from "./check-engines"
 import { distDir, isProduction, root, siteDir } from "./lib"
 
 await buildGames()
+await checkEngines()
 
 const astro = Bun.spawnSync(["bun", "astro", "build"], {
   cwd: siteDir,

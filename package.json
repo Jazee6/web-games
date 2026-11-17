@@ -8,14 +8,23 @@
     "build": "bun scripts/build.ts",
     "preview": "bun run build && wrangler dev",
     "test": "bun test",
-    "typecheck": "bun --cwd apps/site astro check && tsc -p packages/game-contract && tsc -p games/contract-test",
+    "typecheck": "bun scripts/typecheck.ts",
+    "check:engines": "bun scripts/check-engines.ts",
     "lint": "oxlint",
     "fmt": "oxfmt"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.13",
+    "@babel/preset-typescript": "^7.29.7",
+    "@types/babel__core": "^7.20.5",
+    "babel-preset-solid": "^1.9.19",
+    "fast-check": "^4.10.2",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.93.0",
     "typescript": "^7.0.2",
     "wrangler": "^4.162.0"
+  },
+  "dependencies": {
+    "solid-js": "1.9.19"
   }
 }

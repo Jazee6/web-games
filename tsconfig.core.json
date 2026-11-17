@@ -1,0 +1,11 @@
+{
+  // Kernel（games/<slug>/src/core/）专用：不含 DOM 与任何宿主类型（ADR-0004）。
+  // 用法：games/<slug>/src/core/tsconfig.json
+  //   { "extends": "../../../../tsconfig.core.json", "include": ["."], "exclude": ["**/*.test.ts"] }
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": [],
+    "resolveJsonModule": true
+  }
+}
