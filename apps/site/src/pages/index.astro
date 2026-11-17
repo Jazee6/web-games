@@ -1,0 +1,43 @@
+---
+import GameGrid from "@/components/site/GameGrid.astro"
+import LinkList from "@/components/site/LinkList.astro"
+import Layout from "@/layouts/main.astro"
+import { itemList, organization, website } from "@/lib/jsonld"
+import { SITE, categories, games, guides, paths, siteUpdated } from "@/lib/site"
+import { text } from "@/lib/ui-text"
+---
+
+<Layout
+  title={`${SITE.name} – Free Puzzle Games in Your Browser`}
+  description={SITE.description}
+  jsonLd={[website(), organization(), itemList(games.map((game) => ({ name: game.name, path: paths.game(game.slug) })))]}
+  updated={siteUpdated}
+>
+  <div class="flex flex-col gap-2">
+    <h1 class="font-heading text-3xl font-semibold">{SITE.name}</h1>
+    <p class="max-w-2xl text-muted-foreground">{SITE.description}</p>
+  </div>
+  <GameGrid games={games} aboveFold />
+  {
+    categories.length > 0 && (
+      <section class="flex flex-col gap-4">
+        <h2 class="font-heading text-xl font-semibold">Categories</h2>
+        <LinkList
+          items={categories.map((c) => ({
+            name: text.gamesInCategory(c.name),
+            href: paths.category(c.id),
+            description: c.description,
+          }))}
+        />
+      </section>
+    )
+  }
+  {
+    guides.length > 0 && (
+      <section class="flex flex-col gap-4">
+        <h2 class="font-heading text-xl font-semibold">{text.guides}</h2>
+        <LinkList items={guides.map((g) => ({ name: g.title, href: paths.guide(g.slug), description: g.description }))} />
+      </section>
+    )
+  }
+</Layout>

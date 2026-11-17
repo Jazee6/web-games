@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "web-games",
+  "compatibility_date": "2026-11-01",
+  // 只托管静态资源，首发没有服务端代码（ADR-0001）。
+  "assets": {
+    "directory": "./apps/site/dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

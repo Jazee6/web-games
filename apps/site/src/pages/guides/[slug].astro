@@ -1,0 +1,44 @@
+---
+import { render } from "astro:content"
+import GameGrid from "@/components/site/GameGrid.astro"
+import Layout from "@/layouts/main.astro"
+import { article } from "@/lib/jsonld"
+import { ogImage } from "@/lib/og"
+import { type Guide, guides, paths } from "@/lib/site"
+import { text } from "@/lib/ui-text"
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }))
+}
+
+interface Props {
+  guide: Guide
+}
+
+const { guide } = Astro.props
+const { Content } = await render(guide.entry)
+const image = await ogImage(guide.games[0]?.coverImage)
+---
+
+<Layout
+  title={guide.title}
+  description={guide.description}
+  image={image}
+  ogType="article"
+  crumbs={[{ name: guide.title, path: paths.guide(guide.slug) }]}
+  jsonLd={[article(guide, image)]}
+  updated={guide.updated}
+>
+  <article class="typeset max-w-3xl">
+    <h1>{guide.title}</h1>
+    <Content />
+  </article>
+  {
+    guide.games.length > 0 && (
+      <section class="flex flex-col gap-4">
+        <h2 class="font-heading text-xl font-semibold">{text.games}</h2>
+        <GameGrid games={guide.games} />
+      </section>
+    )
+  }
+</Layout>

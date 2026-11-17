@@ -1,0 +1,63 @@
+---
+import { render } from "astro:content"
+import Player from "@/components/player/Player.astro"
+import AdSlot from "@/components/site/AdSlot.astro"
+import GameGrid from "@/components/site/GameGrid.astro"
+import LinkList from "@/components/site/LinkList.astro"
+import Layout from "@/layouts/main.astro"
+import { faqPage, videoGame } from "@/lib/jsonld"
+import { ogImage } from "@/lib/og"
+import { type Game, categoryOf, categoryPath, games, guidesFor, paths, relatedGames } from "@/lib/site"
+import { text } from "@/lib/ui-text"
+
+export function getStaticPaths() {
+  return games.map((game) => ({ params: { slug: game.slug }, props: { game } }))
+}
+
+interface Props {
+  game: Game
+}
+
+const { game } = Astro.props
+const category = categoryOf(game)
+const categoryUrl = categoryPath(category)
+const { Content } = await render(game.entry)
+const image = await ogImage(game.coverImage)
+const guides = guidesFor(game)
+const related = relatedGames(game)
+---
+
+<Layout
+  title={game.title}
+  description={game.description}
+  image={image}
+  crumbs={[
+    ...(categoryUrl ? [{ name: text.gamesInCategory(category.name), path: categoryUrl }] : []),
+    { name: game.name, path: paths.game(game.slug) },
+  ]}
+  jsonLd={[videoGame(game, category, image), faqPage(game)]}
+  updated={game.updated}
+>
+  <h1 class="font-heading text-3xl font-semibold">{game.name}</h1>
+  <Player game={game} />
+  <article class="typeset max-w-3xl">
+    <Content />
+  </article>
+  <AdSlot name="content" />
+  {
+    guides.length > 0 && (
+      <section class="flex flex-col gap-4">
+        <h2 class="font-heading text-xl font-semibold">{text.guides}</h2>
+        <LinkList items={guides.map((g) => ({ name: g.title, href: paths.guide(g.slug), description: g.description }))} />
+      </section>
+    )
+  }
+  {
+    related.length > 0 && (
+      <section class="flex flex-col gap-4">
+        <h2 class="font-heading text-xl font-semibold">{text.relatedGames}</h2>
+        <GameGrid games={related} />
+      </section>
+    )
+  }
+</Layout>

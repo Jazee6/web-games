@@ -1,0 +1,38 @@
+---
+import { render } from "astro:content"
+import GameGrid from "@/components/site/GameGrid.astro"
+import Layout from "@/layouts/main.astro"
+import { collectionPage, itemList } from "@/lib/jsonld"
+import { type Category, categories, paths } from "@/lib/site"
+import { text } from "@/lib/ui-text"
+
+/** 只为 Game 数量达标的 Category 生成页面（ADR-0003）。 */
+export function getStaticPaths() {
+  return categories.map((category) => ({ params: { category: category.id }, props: { category } }))
+}
+
+interface Props {
+  category: Category
+}
+
+const { category } = Astro.props
+const { Content } = await render(category.entry)
+const heading = text.gamesInCategory(category.name)
+---
+
+<Layout
+  title={category.title}
+  description={category.description}
+  crumbs={[{ name: heading, path: paths.category(category.id) }]}
+  jsonLd={[
+    collectionPage(category),
+    itemList(category.games.map((game) => ({ name: game.name, path: paths.game(game.slug) }))),
+  ]}
+  updated={category.updated}
+>
+  <h1 class="font-heading text-3xl font-semibold">{heading}</h1>
+  <div class="typeset max-w-3xl">
+    <Content />
+  </div>
+  <GameGrid games={category.games} aboveFold />
+</Layout>

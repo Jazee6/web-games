@@ -1,0 +1,21 @@
+{
+  "name": "web-games",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/*", "games/*", "packages/*"],
+  "scripts": {
+    "dev": "bun scripts/build-games.ts && bun --cwd apps/site astro dev",
+    "build": "bun scripts/build.ts",
+    "preview": "bun run build && wrangler dev",
+    "test": "bun test",
+    "typecheck": "bun --cwd apps/site astro check && tsc -p packages/game-contract && tsc -p games/contract-test",
+    "lint": "oxlint",
+    "fmt": "oxfmt"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.162.0"
+  }
+}

@@ -1,0 +1,19 @@
+---
+/** 标题加描述的链接列表，用于 Guide 等。 */
+interface Props {
+  items: { name: string; href: string; description: string }[]
+}
+---
+
+<ul class="flex flex-col gap-4">
+  {
+    Astro.props.items.map((item) => (
+      <li class="flex flex-col gap-1">
+        <a class="font-medium underline-offset-4 hover:underline" href={item.href}>
+          {item.name}
+        </a>
+        <p class="text-sm text-muted-foreground">{item.description}</p>
+      </li>
+    ))
+  }
+</ul>

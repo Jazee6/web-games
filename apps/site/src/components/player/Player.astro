@@ -1,0 +1,59 @@
+---
+/**
+ * Player 首屏：只有封面和开始按钮（静态 HTML）。
+ * 点击后才按需加载 React 外壳并创建 iframe，点击前页面只多一个很小的脚本。
+ */
+import { Image } from "astro:assets"
+import { PlayIcon } from "lucide-react"
+import { buttonVariants } from "@/components/ui/button"
+import { Spinner } from "@/components/ui/spinner"
+import type { Game } from "@/lib/site"
+
+interface Props {
+  game: Game
+  locale?: string
+}
+
+const { game, locale = "en" } = Astro.props
+---
+
+<div
+  data-player
+  data-slug={game.slug}
+  data-name={game.name}
+  data-locale={locale}
+  class="relative flex aspect-[3/4] w-full flex-col overflow-hidden rounded-xl bg-muted sm:aspect-video data-[fullscreen=pseudo]:fixed data-[fullscreen=pseudo]:inset-0 data-[fullscreen=pseudo]:z-50 data-[fullscreen=pseudo]:aspect-auto data-[fullscreen=pseudo]:rounded-none data-[fullscreen=native]:aspect-auto data-[fullscreen=native]:rounded-none"
+>
+  <div data-player-cover class="absolute inset-0 flex items-center justify-center">
+    <Image
+      src={game.coverImage}
+      alt=""
+      width={1280}
+      height={720}
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 size-full object-cover"
+    />
+    <button data-player-start type="button" class={buttonVariants({ size: "lg", className: "relative" })}>
+      <Spinner data-icon="inline-start" className="hidden group-data-[loading]/button:block" />
+      <PlayIcon data-icon="inline-start" className="group-data-[loading]/button:hidden" />
+      Play {game.name}
+    </button>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-player]")) {
+    const start = root.querySelector<HTMLButtonElement>("[data-player-start]")!
+    start.addEventListener(
+      "click",
+      async () => {
+        start.disabled = true
+        start.dataset.loading = ""
+        const { mountPlayer } = await import("./mount")
+        mountPlayer(root)
+      },
+      { once: true },
+    )
+  }
+</script>

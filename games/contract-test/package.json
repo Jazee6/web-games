@@ -1,0 +1,8 @@
+{
+  "name": "@web-games/contract-test",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@web-games/game-contract": "workspace:*"
+  }
+}

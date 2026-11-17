@@ -1,0 +1,8 @@
+{
+  "slug": "layout-sample",
+  "name": "Layout Sample",
+  "category": "puzzle",
+  "cover": "cover.svg",
+  "tier": "dom",
+  "draft": true
+}

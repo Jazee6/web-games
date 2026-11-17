@@ -1,0 +1,3 @@
+# 永久跳转表：slug 改名或下架时登记，构建时拷贝为产物的 _redirects。
+# 格式：<旧地址> <新地址> 301
+# 例：/games/old-slug/ /games/new-slug/ 301

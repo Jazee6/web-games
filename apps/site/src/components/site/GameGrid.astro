@@ -1,0 +1,32 @@
+---
+import { getImage } from "astro:assets"
+import { GameCard } from "./GameCard"
+import { type Game, paths } from "@/lib/site"
+
+interface Props {
+  games: Game[]
+  /** 位于首屏时，第一行卡片立即加载。 */
+  aboveFold?: boolean
+}
+
+const cards = await Promise.all(
+  Astro.props.games.map(async (game) => {
+    const image = await getImage({ src: game.coverImage, width: 640, height: 360, format: "webp" })
+    return {
+      game,
+      cover: { src: image.src, width: Number(image.attributes.width), height: Number(image.attributes.height) },
+    }
+  }),
+)
+---
+
+<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    cards.map(({ game, cover }, i) => (
+      <li>
+        <GameCard name={game.name} description={game.description} href={paths.game(game.slug)} cover={cover}
+          eager={Astro.props.aboveFold === true && i < 3} />
+      </li>
+    ))
+  }
+</ul>

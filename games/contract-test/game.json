@@ -1,0 +1,8 @@
+{
+  "slug": "contract-test",
+  "name": "Contract Test",
+  "category": "puzzle",
+  "cover": "cover.svg",
+  "tier": "dom",
+  "draft": true
+}
