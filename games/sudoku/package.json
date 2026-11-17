@@ -1,0 +1,8 @@
+{
+  "name": "@web-games/sudoku",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@web-games/game-contract": "workspace:*"
+  }
+}

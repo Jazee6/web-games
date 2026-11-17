@@ -1,0 +1,141 @@
+{
+  "kernelVersion": 1,
+  "generatorVersion": 1,
+  "seed": "golden-medium",
+  "options": {
+    "difficulty": "medium"
+  },
+  "commands": [
+    {
+      "t": "place",
+      "cell": 0,
+      "digit": 9,
+      "ms": 1500
+    },
+    {
+      "t": "place",
+      "cell": 1,
+      "digit": 6,
+      "ms": 3037
+    },
+    {
+      "t": "place",
+      "cell": 3,
+      "digit": 5,
+      "ms": 4611
+    },
+    {
+      "t": "place",
+      "cell": 4,
+      "digit": 7,
+      "ms": 6222
+    },
+    {
+      "t": "place",
+      "cell": 5,
+      "digit": 3,
+      "ms": 7870
+    },
+    {
+      "t": "place",
+      "cell": 6,
+      "digit": 2,
+      "ms": 9555
+    },
+    {
+      "t": "undo",
+      "ms": 11277
+    },
+    {
+      "t": "undo",
+      "ms": 13036
+    },
+    {
+      "t": "undo",
+      "ms": 14832
+    },
+    {
+      "t": "redo",
+      "ms": 16665
+    },
+    {
+      "t": "place",
+      "cell": 14,
+      "digit": 8,
+      "ms": 18535
+    },
+    {
+      "t": "redo",
+      "ms": 20442
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 1,
+      "ms": 22386
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 2,
+      "ms": 24367
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 3,
+      "ms": 26385
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 4,
+      "ms": 28440
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 5,
+      "ms": 30532
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 6,
+      "ms": 32661
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 7,
+      "ms": 34827
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 8,
+      "ms": 37030
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 9,
+      "ms": 39270
+    },
+    {
+      "t": "note",
+      "cell": 16,
+      "digit": 5,
+      "ms": 41547
+    },
+    {
+      "t": "clear",
+      "cell": 16,
+      "ms": 43861
+    },
+    {
+      "t": "undo",
+      "ms": 46212
+    }
+  ]
+}

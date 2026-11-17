@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "jsx": "preserve", "jsxImportSource": "solid-js", "resolveJsonModule": true },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
+}

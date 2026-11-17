@@ -1,0 +1,71 @@
+{
+  "kernelVersion": 1,
+  "generatorVersion": 1,
+  "seed": "golden-invalid",
+  "options": {
+    "difficulty": "easy"
+  },
+  "commands": [
+    {
+      "t": "place",
+      "cell": 3,
+      "digit": 5,
+      "ms": 1500
+    },
+    {
+      "t": "place",
+      "cell": 81,
+      "digit": 1,
+      "ms": 3037
+    },
+    {
+      "t": "place",
+      "cell": 0,
+      "digit": 0,
+      "ms": 4611
+    },
+    {
+      "t": "place",
+      "cell": 0,
+      "digit": 1.5,
+      "ms": 6222
+    },
+    {
+      "t": "note",
+      "cell": 3,
+      "digit": 3,
+      "ms": 7870
+    },
+    {
+      "t": "clear",
+      "cell": 0,
+      "ms": 9555
+    },
+    {
+      "t": "fly",
+      "ms": 11277
+    },
+    {
+      "t": "undo",
+      "ms": 13036
+    },
+    {
+      "t": "place",
+      "cell": 0,
+      "digit": 1,
+      "ms": 14832
+    },
+    {
+      "t": "place",
+      "cell": 0,
+      "digit": 1,
+      "ms": 16665
+    },
+    {
+      "t": "note",
+      "cell": 0,
+      "digit": 2,
+      "ms": 18535
+    }
+  ]
+}
